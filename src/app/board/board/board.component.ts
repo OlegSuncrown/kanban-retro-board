@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { BoardService } from 'src/app/services/board.service';
 
 @Component({
   selector: 'app-board',
@@ -8,7 +9,9 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class BoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public boardService: BoardService
+  ) { }
 
   ngOnInit(): void {
   }

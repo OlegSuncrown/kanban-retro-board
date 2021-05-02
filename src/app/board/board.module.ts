@@ -8,9 +8,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { BoardItemComponent } from './board-item/board-item.component';
 @NgModule({
   declarations: [
-    BoardComponent
+    BoardComponent,
+    BoardItemComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatIconModule,
     MatButtonModule,
     DragDropModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule
   ], 
   exports: [
     BoardComponent
