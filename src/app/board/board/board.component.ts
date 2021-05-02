@@ -15,20 +15,10 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
 
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
+  onDeleteComment(comment, columnId, item) {
+    this.boardService.deleteComment(columnId, item.id, comment.id)
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -40,9 +30,4 @@ export class BoardComponent implements OnInit {
                         event.currentIndex);
     }
   }
-
-  data = [
-    this.done,
-    this.todo,
-  ]
 }

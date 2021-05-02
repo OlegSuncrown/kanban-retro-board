@@ -48,6 +48,14 @@ export class BoardService {
             {
               id: 1,
               text: 'Some comment'
+            },
+            {
+              id: 2,
+              text: 'Some comment'
+            },
+            {
+              id: 3,
+              text: 'Some comment'
             }
           ]
         }
@@ -60,5 +68,23 @@ export class BoardService {
 
   getBoard$() {
     return this.board$.asObservable()
+  }
+
+  deleteComment(columnId, itemId, commentId) {
+    this.board = this.board.map((column) => {
+      if(column.id === columnId) {
+        const list = column.list.map(item => {
+          if(item.id === itemId) {
+            item.comments = item.comments.filter((comment) => {
+              return comment.id !== commentId
+            })
+          }
+          return item
+        })
+        column.list = list
+      }
+
+      return column
+    })
   }
 }

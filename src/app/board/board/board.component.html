@@ -5,7 +5,11 @@
 
       <div cdkDropList [cdkDropListData]="column.list" class="example-list" (cdkDropListDropped)="drop($event)">
         <div cdkDrag class="example-box" [ngStyle]="{background: column.color}" *ngFor="let item of column.list">
-          <app-board-item [item]="item"></app-board-item>
+          <app-board-item [item]="item">
+            <div *ngFor="let comment of item.comments">
+              <app-comment-item [comment]="comment" (emitComment)="onDeleteComment($event, column.id, item)"></app-comment-item>
+            </div>
+          </app-board-item>
         </div>
       </div>
     </div>
