@@ -15,6 +15,9 @@
         <button mat-raised-button class="w-100 mb-1 btn-add">+</button>
       </app-dialog>
 
+      <!-- Color Panel -->
+      <app-color-panel (emitColor)="onColorChange($event, column.id)"></app-color-panel>
+      
       <div cdkDropList [cdkDropListData]="column.list" class="example-list" (cdkDropListDropped)="drop($event)">
         <div cdkDrag class="example-box" [ngStyle]="{background: column.color}" *ngFor="let item of column.list">
           <app-board-item 

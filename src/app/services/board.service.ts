@@ -70,6 +70,16 @@ export class BoardService {
     return this.board$.asObservable()
   }
 
+  changeColumnColor(color: string, columnId: number) {
+    this.board = this.board.map((column: any) => {
+      if (column.id === columnId) {
+        column.color = color;
+      }
+      return column;
+    });
+    this.board$.next([...this.board]);
+  }
+
   addColumn(title: string) {
     const newColumn: any = {
       id: Date.now(),

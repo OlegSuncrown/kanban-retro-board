@@ -12,11 +12,13 @@ import { BoardItemComponent } from './board-item/board-item.component';
 import { CommentItemComponent } from './comment-item/comment-item.component';
 
 import { DialogModule } from '../components/dialog/dialog.module';
+import { ColorPanelComponent } from './color-panel/color-panel.component';
 @NgModule({
   declarations: [
     BoardComponent,
     BoardItemComponent,
-    CommentItemComponent
+    CommentItemComponent,
+    ColorPanelComponent
   ],
   imports: [
     CommonModule,
