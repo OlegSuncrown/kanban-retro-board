@@ -70,6 +70,17 @@ export class BoardService {
     return this.board$.asObservable()
   }
 
+  deleteCard(cardId: number, columnId: number) {
+    this.board = this.board.map((column: any) => {
+      if (column.id === columnId) {
+        column.list = column.list.filter((card: any) => card.id !== cardId);
+      }
+      return column;
+    });
+
+    this.board$.next([...this.board]);
+  }
+
   changeLike(cardId: number, columnId: number, increase: boolean) {
     this.board = this.board.map((column) => {
       if (column.id === columnId) {

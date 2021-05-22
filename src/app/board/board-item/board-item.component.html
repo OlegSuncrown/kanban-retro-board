@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between align-items-start mb-2">
   <div class="mt-1">{{ item.text }}</div>
-  <button mat-icon-button class="icon-delete">
+  <button mat-icon-button class="icon-delete" (click)="onCardDelete(item.id)">
     <mat-icon style="font-size: 18px;">delete</mat-icon>
   </button>
 </div>

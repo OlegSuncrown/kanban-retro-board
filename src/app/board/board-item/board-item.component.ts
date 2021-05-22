@@ -9,6 +9,8 @@ export class BoardItemComponent implements OnInit {
   @Input() item;
   @Output() emitText: EventEmitter<{ id: number; text: string }> = new EventEmitter();
   @Output() emitCardItem: EventEmitter<{ card: any; increase: boolean }> = new EventEmitter();
+  @Output() emitDeleteCard: EventEmitter<number> = new EventEmitter();
+  
   commentInput = ''
   open = false;
   constructor() { }
@@ -26,5 +28,9 @@ export class BoardItemComponent implements OnInit {
 
   onCardItemEmit(card: any, increase: boolean) {
     this.emitCardItem.emit({ card, increase });
+  }
+
+  onCardDelete(id: number) {
+    this.emitDeleteCard.emit(id)
   }
 }

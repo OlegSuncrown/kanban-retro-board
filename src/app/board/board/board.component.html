@@ -9,6 +9,7 @@
             [item]="item" 
             (emitText)="onAddComment($event, column.id)" 
             (emitCardItem)="onChangeLike($event, column.id)"
+            (emitDeleteCard)="onDeleteCard($event, column.id)"
           >
             <div *ngFor="let comment of item.comments">
               <app-comment-item [comment]="comment" (emitComment)="onDeleteComment($event, column.id, item)"></app-comment-item>
