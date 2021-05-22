@@ -13,7 +13,7 @@
     <mat-icon class="icon">thumb_up_off_alt</mat-icon>
   </button>
   <span>{{ item.like }}</span>
-  <button mat-icon-button disableRipple class="ml-2" (click)="open = !open">
+  <button mat-icon-button disableRipple class="ml-2" (click)="onOpenComment()">
     <mat-icon class="icon">chat_bubble_outline</mat-icon>
   </button>
   <span>{{ item.comments.length }}</span>

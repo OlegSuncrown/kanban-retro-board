@@ -32,7 +32,7 @@ export class BoardService {
               text: 'Some comment'
             }
           ]
-        }
+        },
       ]
     },
     {
@@ -73,7 +73,7 @@ export class BoardService {
   deleteComment(columnId, itemId, commentId) {
     this.board = this.board.map((column) => {
       if(column.id === columnId) {
-        const list = column.list.map(item => {
+        const list = column.list.map((item)=> {
           if(item.id === itemId) {
             item.comments = item.comments.filter((comment) => {
               return comment.id !== commentId
@@ -83,8 +83,8 @@ export class BoardService {
         })
         column.list = list
       }
-
       return column
     })
+    this.board$.next([...this.board])
   }
 }

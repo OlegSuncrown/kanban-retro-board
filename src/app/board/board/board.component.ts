@@ -5,7 +5,7 @@ import { BoardService } from 'src/app/services/board.service';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
 
@@ -14,6 +14,7 @@ export class BoardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('BOARD - INIT')
   }
 
   onDeleteComment(comment, columnId, item) {
