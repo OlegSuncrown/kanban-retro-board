@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs';
+import { Card, Column, Comment } from '../models/column.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ export class BoardService {
     {
       id: 1,
       title: 'To Do',
-      color: '#e92c62',
+      color: '#009886',
       list: [
         {
           id: 1,
@@ -22,56 +23,19 @@ export class BoardService {
             }
           ]
         },
-        {
-          id: 2,
-          text: 'Example card item 222',
-          like: 1,
-          comments: [
-            {
-              id: 1,
-              text: 'Some comment'
-            }
-          ]
-        },
       ]
     },
-    {
-      id: 2,
-      title: 'In Progress',
-      color: 'green',
-      list: [
-        {
-          id: 2,
-          text: 'Example card item',
-          like: 3,
-          comments: [
-            {
-              id: 1,
-              text: 'Some comment'
-            },
-            {
-              id: 2,
-              text: 'Some comment'
-            },
-            {
-              id: 3,
-              text: 'Some comment'
-            }
-          ]
-        }
-      ]
-    }
   ]
 
-  private board: any[] = this.initBoard
-  private board$ = new BehaviorSubject<any[]>(this.initBoard)
+  private board: Column[] = this.initBoard
+  private board$ = new BehaviorSubject<Column[]>(this.initBoard)
 
   getBoard$() {
     return this.board$.asObservable()
   }
 
   changeColumnColor(color: string, columnId: number) {
-    this.board = this.board.map((column: any) => {
+    this.board = this.board.map((column: Column) => {
       if (column.id === columnId) {
         column.color = color;
       }
@@ -81,7 +45,7 @@ export class BoardService {
   }
 
   addColumn(title: string) {
-    const newColumn: any = {
+    const newColumn: Column = {
       id: Date.now(),
       title: title,
       color: '#009886',
@@ -93,14 +57,14 @@ export class BoardService {
   }
 
   addCard(text: string, columnId: number) {
-    const newCard: any = {
+    const newCard: Card = {
       id: Date.now(),
       text,
       like: 0,
       comments: [],
     };
 
-    this.board = this.board.map((column: any) => {
+    this.board = this.board.map((column: Column) => {
       if (column.id === columnId) {
         column.list = [newCard, ...column.list];
       }
@@ -111,14 +75,14 @@ export class BoardService {
   }
 
   deleteColumn(columnId) {
-    this.board = this.board.filter((column: any) => column.id !== columnId);
+    this.board = this.board.filter((column: Column) => column.id !== columnId);
     this.board$.next([...this.board]);
   }
 
   deleteCard(cardId: number, columnId: number) {
-    this.board = this.board.map((column: any) => {
+    this.board = this.board.map((column: Column) => {
       if (column.id === columnId) {
-        column.list = column.list.filter((card: any) => card.id !== cardId);
+        column.list = column.list.filter((card: Card) => card.id !== cardId);
       }
       return column;
     });
@@ -127,9 +91,9 @@ export class BoardService {
   }
 
   changeLike(cardId: number, columnId: number, increase: boolean) {
-    this.board = this.board.map((column) => {
+    this.board = this.board.map((column: Column) => {
       if (column.id === columnId) {
-        const list = column.list.map((card) => {
+        const list = column.list.map((card: Card) => {
           if (card.id === cardId) {
             if (increase) {
               card.like++;
@@ -153,9 +117,9 @@ export class BoardService {
   }
 
   addComment(columnId: number, cardId: number, text: string) {
-    this.board = this.board.map((column: any) => {
+    this.board = this.board.map((column: Column) => {
       if (column.id === columnId) {
-        const list = column.list.map((card: any) => {
+        const list = column.list.map((card: Card) => {
           if (card.id === cardId) {
             const newComment = {
               id: Date.now(),
@@ -175,11 +139,11 @@ export class BoardService {
   }
 
   deleteComment(columnId, itemId, commentId) {
-    this.board = this.board.map((column) => {
+    this.board = this.board.map((column: Column) => {
       if(column.id === columnId) {
         const list = column.list.map((item)=> {
           if(item.id === itemId) {
-            item.comments = item.comments.filter((comment) => {
+            item.comments = item.comments.filter((comment: Comment) => {
               return comment.id !== commentId
             })
           }
