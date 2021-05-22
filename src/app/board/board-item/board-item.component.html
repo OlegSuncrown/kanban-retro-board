@@ -6,10 +6,10 @@
 </div>
 
 <div class="d-flex justify-content-end align-items-center mb-2">
-  <button mat-icon-button class="mt-1">
+  <button mat-icon-button class="mt-1" (click)="onCardItemEmit(item, false)">
     <mat-icon class="icon">thumb_down_off_alt</mat-icon>
   </button>
-  <button mat-icon-button disableRipple>
+  <button mat-icon-button disableRipple (click)="onCardItemEmit(item, true)">
     <mat-icon class="icon">thumb_up_off_alt</mat-icon>
   </button>
   <span>{{ item.like }}</span>

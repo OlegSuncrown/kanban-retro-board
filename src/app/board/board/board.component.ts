@@ -17,6 +17,11 @@ export class BoardComponent implements OnInit {
     console.log('BOARD - INIT')
   }
 
+  onChangeLike(event: {card: any, increase: boolean}, columnId: number ) {
+    const { card: { id }, increase } = event
+    this.boardService.changeLike(id, columnId, increase)
+  }
+
   onAddComment(event: {id: number, text: string}, columnId: number) {
     this.boardService.addComment(columnId, event.id, event.text)
   }
