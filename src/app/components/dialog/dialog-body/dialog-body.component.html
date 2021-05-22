@@ -1,0 +1,12 @@
+<div mat-dialog-content>
+  <h3>{{data.question}}</h3>
+  <mat-form-field class="w-100">
+    <mat-label>Add Title</mat-label>
+    <input matInput [(ngModel)]="data.text">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="data.text" cdkFocusInitial color="primary">Confirm</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>
+
