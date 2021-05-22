@@ -70,6 +70,11 @@ export class BoardService {
     return this.board$.asObservable()
   }
 
+  deleteColumn(columnId) {
+    this.board = this.board.filter((column: any) => column.id !== columnId);
+    this.board$.next([...this.board]);
+  }
+
   deleteCard(cardId: number, columnId: number) {
     this.board = this.board.map((column: any) => {
       if (column.id === columnId) {

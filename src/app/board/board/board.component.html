@@ -1,7 +1,19 @@
 <div class="container-fluid">
   <div cdkDropListGroup class="row">
-    <div class="col-sm-4" *ngFor="let column of boardService.getBoard$() | async">
-      <h2>{{column.title}}</h2>
+    <div class="col-sm-6 col-lg-3 mb-3" *ngFor="let column of boardService.getBoard$() | async">
+
+      <!-- Column Title -->
+      <div class="d-flex justify-content-between align-items-center p-2 shadow-sm column-header">
+        <h2 class="m-0">{{column.title}}</h2>
+        <button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column.id)">
+          <mat-icon style="font-size: 20px;">delete</mat-icon>
+        </button>
+      </div>
+
+      <!-- Add New Card To Column -->
+      <app-dialog (emitText)="onAddCard($event, column.id)" [question]="'Add new card in ' + column.title + ' column'">
+        <button mat-raised-button class="w-100 mb-1 btn-add">+</button>
+      </app-dialog>
 
       <div cdkDropList [cdkDropListData]="column.list" class="example-list" (cdkDropListDropped)="drop($event)">
         <div cdkDrag class="example-box" [ngStyle]="{background: column.color}" *ngFor="let item of column.list">

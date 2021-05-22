@@ -17,10 +17,14 @@ export class BoardComponent implements OnInit {
     console.log('BOARD - INIT')
   }
 
+  onDeleteColumn(columnId: number) {
+    this.boardService.deleteColumn(columnId)
+  }
+  
   onDeleteCard(cardId: number, columnId: number) {
     this.boardService.deleteCard(cardId, columnId)
   }
-  
+
   onChangeLike(event: {card: any, increase: boolean}, columnId: number ) {
     const { card: { id }, increase } = event
     this.boardService.changeLike(id, columnId, increase)
