@@ -70,6 +70,36 @@ export class BoardService {
     return this.board$.asObservable()
   }
 
+  addColumn(title: string) {
+    const newColumn: any = {
+      id: Date.now(),
+      title: title,
+      color: '#009886',
+      list: [],
+    };
+
+    this.board = [...this.board, newColumn];
+    this.board$.next([...this.board]);
+  }
+
+  addCard(text: string, columnId: number) {
+    const newCard: any = {
+      id: Date.now(),
+      text,
+      like: 0,
+      comments: [],
+    };
+
+    this.board = this.board.map((column: any) => {
+      if (column.id === columnId) {
+        column.list = [newCard, ...column.list];
+      }
+      return column;
+    });
+
+    this.board$.next([...this.board]);
+  }
+
   deleteColumn(columnId) {
     this.board = this.board.filter((column: any) => column.id !== columnId);
     this.board$.next([...this.board]);

@@ -3,6 +3,10 @@
     <span class="mat-h2">Test Board</span>
   </div>
   <div>
-    <button mat-raised-button color="primary">New Column</button>
+    <app-dialog (emitText)="addColumn($event)" question="Add new column">
+      <button mat-raised-button color="primary">
+        New Column
+      </button>
+    </app-dialog>
   </div>
 </mat-toolbar>

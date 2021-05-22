@@ -17,6 +17,12 @@ export class BoardComponent implements OnInit {
     console.log('BOARD - INIT')
   }
 
+  onAddCard(text: string, columnId: number) {
+    if(text) {
+      this.boardService.addCard(text, columnId)
+    }
+  }
+  
   onDeleteColumn(columnId: number) {
     this.boardService.deleteColumn(columnId)
   }
