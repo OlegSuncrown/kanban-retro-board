@@ -70,6 +70,54 @@ export class BoardService {
     return this.board$.asObservable()
   }
 
+  changeLike(cardId: number, columnId: number, increase: boolean) {
+    this.board = this.board.map((column) => {
+      if (column.id === columnId) {
+        const list = column.list.map((card) => {
+          if (card.id === cardId) {
+            if (increase) {
+              card.like++;
+            } else {
+              if (card.like > 0) {
+                card.like--;
+              }
+            }
+          }
+          return card;
+        });
+
+        column.list = list;
+        return column;
+      } else {
+        return column;
+      }
+    });
+
+    this.board$.next([...this.board]);
+  }
+
+  addComment(columnId: number, cardId: number, text: string) {
+    this.board = this.board.map((column: any) => {
+      if (column.id === columnId) {
+        const list = column.list.map((card: any) => {
+          if (card.id === cardId) {
+            const newComment = {
+              id: Date.now(),
+              text,
+            };
+            card.comments = [newComment, ...card.comments];
+          }
+          return card;
+        });
+
+        column.list = list;
+      }
+      return column;
+    });
+
+    this.board$.next([...this.board]);
+  }
+
   deleteComment(columnId, itemId, commentId) {
     this.board = this.board.map((column) => {
       if(column.id === columnId) {

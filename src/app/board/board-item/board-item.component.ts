@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-board-item',
@@ -7,15 +7,20 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 })
 export class BoardItemComponent implements OnInit {
   @Input() item;
+  @Output() emitText: EventEmitter<{ id: number; text: string }> = new EventEmitter();
+
   commentInput = ''
   open = false;
   constructor() { }
 
-  ngOnInit(): void {
-    console.log('Board Item Init')
-  }
+  ngOnInit(): void {}
 
   onOpenComment() {
     this.open = !this.open
+  }
+
+  onCommentTextEmit(id: number) {
+    this.emitText.emit({ id, text: this.commentInput });
+    this.commentInput = ''
   }
 }

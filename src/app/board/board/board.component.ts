@@ -17,6 +17,10 @@ export class BoardComponent implements OnInit {
     console.log('BOARD - INIT')
   }
 
+  onAddComment(event: {id: number, text: string}, columnId: number) {
+    this.boardService.addComment(columnId, event.id, event.text)
+  }
+  
   onDeleteComment(comment, columnId, item) {
     this.boardService.deleteComment(columnId, item.id, comment.id)
   }
