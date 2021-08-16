@@ -25,6 +25,24 @@ export class BoardService {
         },
       ]
     },
+    {
+      id: 2,
+      title: 'In Progress',
+      color: '#009886',
+      list: [
+        {
+          id: 1,
+          text: 'Example card item',
+          like: 1,
+          comments: [
+            {
+              id: 1,
+              text: 'Some comment'
+            }
+          ]
+        },
+      ]
+    },
   ]
 
   private board: Column[] = this.initBoard

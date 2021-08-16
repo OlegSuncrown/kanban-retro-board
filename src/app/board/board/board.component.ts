@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { BoardService } from 'src/app/services/board.service';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -10,11 +11,22 @@ import { BoardService } from 'src/app/services/board.service';
 export class BoardComponent implements OnInit {
 
   constructor(
-    public boardService: BoardService
+    public boardService: BoardService,
   ) { }
 
+  focusedElement: any;
+
   ngOnInit(): void {
-    console.log('BOARD - INIT')
+    fromEvent(document, 'keyup').subscribe((e: any) => {
+      console.log(e)
+      if(e.key === "Control") {
+        this.focusedElement.click()
+      }
+    })
+  }
+
+  onClick() {
+    console.log('click happened when pressed CTRL')
   }
 
   onColorChange(color: string, columnId: number) {
@@ -48,7 +60,14 @@ export class BoardComponent implements OnInit {
     this.boardService.deleteComment(columnId, item.id, comment.id)
   }
 
+  onFocus(e) {
+    this.focusedElement = e.target
+    // console.log(e.target)
+  }
+
   drop(event: CdkDragDrop<string[]>) {
+   event.distance = {x: 100, y: 100}
+   console.log(event)
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
