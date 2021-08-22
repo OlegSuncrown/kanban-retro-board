@@ -44,6 +44,8 @@ export class BoardComponent implements OnInit {
 
             const nextColumn = this.data[indexOfSelectedCoulumn - 1]
             nextColumn.list = [...nextColumn.list, this.item]
+
+            this.column = nextColumn
           }
         }
 
@@ -57,6 +59,8 @@ export class BoardComponent implements OnInit {
 
             const nextColumn = this.data[indexOfSelectedCoulumn + 1]
             nextColumn.list = [...nextColumn.list, this.item]
+
+            this.column = nextColumn
           }
         }
       })
