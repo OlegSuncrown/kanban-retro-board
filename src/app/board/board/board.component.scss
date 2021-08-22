@@ -13,6 +13,10 @@
   border-radius: 2px;
   cursor: move;
   font-size: 14px;
+  &:focus {
+    outline: 5px solid green;
+    border:  5px solid rgb(128, 0, 79);;
+  }
 }
 
 

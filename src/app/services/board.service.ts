@@ -13,12 +13,12 @@ export class BoardService {
       color: '#009886',
       list: [
         {
-          id: 1,
+          id: 11,
           text: 'Example card item',
           like: 1,
           comments: [
             {
-              id: 1,
+              id: 111,
               text: 'Some comment'
             }
           ]
@@ -31,12 +31,12 @@ export class BoardService {
       color: '#009886',
       list: [
         {
-          id: 1,
+          id: 22,
           text: 'Example card item',
           like: 1,
           comments: [
             {
-              id: 1,
+              id: 222,
               text: 'Some comment'
             }
           ]

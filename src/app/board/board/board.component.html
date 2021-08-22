@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div cdkDropListGroup class="row">
-    <div class="col-sm-6 col-lg-3 mb-3" *ngFor="let column of boardService.getBoard$() | async">
+    <div class="col-sm-6 col-lg-3 mb-3" *ngFor="let column of data">
 
       <!-- Column Title -->
       <div class="d-flex justify-content-between align-items-center p-2 shadow-sm column-header">
@@ -19,18 +19,21 @@
       <app-color-panel (emitColor)="onColorChange($event, column.id)"></app-color-panel>
       
       <div cdkDropList [cdkDropListData]="column.list" class="example-list"  (cdkDropListDropped)="drop($event)" CdkDragMove>
-        <div cdkDrag (focus)="onFocus($event)" (click)="onClick($event)" (focusout)="onFocusOut()" tabindex="2" class="example-box" [ngStyle]="{background: column.color}" *ngFor="let item of column.list">
-          <app-board-item 
-            [item]="item" 
-            (emitText)="onAddComment($event, column.id)" 
-            (emitCardItem)="onChangeLike($event, column.id)"
-            (emitDeleteCard)="onDeleteCard($event, column.id)"
-          >
-            <div *ngFor="let comment of item.comments">
-              <app-comment-item [comment]="comment" (emitComment)="onDeleteComment($event, column.id, item)"></app-comment-item>
-            </div>
-          </app-board-item>
-        </div>
+        <ng-container  *ngFor="let item of column.list; let i=index;">
+          <div (click)="onFocusEl(column, item)"cdkDrag [tabindex]="i + 1" class="example-box" [ngStyle]="{background: column.color}">
+            {{i}}
+            <app-board-item 
+              [item]="item" 
+              (emitText)="onAddComment($event, column.id)" 
+              (emitCardItem)="onChangeLike($event, column.id)"
+              (emitDeleteCard)="onDeleteCard($event, column.id)"
+            >
+              <div *ngFor="let comment of item.comments">
+                <app-comment-item [comment]="comment" (emitComment)="onDeleteComment($event, column.id, item)"></app-comment-item>
+              </div>
+            </app-board-item>
+          </div>
+        </ng-container>
       </div>
     </div>
   </div>
