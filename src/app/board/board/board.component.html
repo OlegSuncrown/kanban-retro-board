@@ -18,8 +18,8 @@
       <!-- Color Panel -->
       <app-color-panel (emitColor)="onColorChange($event, column.id)"></app-color-panel>
       
-      <div cdkDropList [cdkDropListData]="column.list" class="example-list"   (cdkDropListDropped)="drop($event)" CdkDragMove>
-        <div cdkDrag (focus)="onFocus($event)" (click)="onClick()" tabindex="2" (cdkDragStarted)="test1($event)" class="example-box" [ngStyle]="{background: column.color}" *ngFor="let item of column.list">
+      <div cdkDropList [cdkDropListData]="column.list" class="example-list"  (cdkDropListDropped)="drop($event)" CdkDragMove>
+        <div cdkDrag (focus)="onFocus($event)" (click)="onClick($event)" (focusout)="onFocusOut()" tabindex="2" class="example-box" [ngStyle]="{background: column.color}" *ngFor="let item of column.list">
           <app-board-item 
             [item]="item" 
             (emitText)="onAddComment($event, column.id)" 
